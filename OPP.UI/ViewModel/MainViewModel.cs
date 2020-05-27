@@ -1,6 +1,7 @@
 ﻿using OPP.Model;
 using OPP.UI.Data;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace OPP.UI.ViewModel
 {
@@ -15,9 +16,9 @@ namespace OPP.UI.ViewModel
             _proizvodjacDataService = proizvodjacDataService;
         }
 
-        public void Load()
+        public async Task LoadAsync()
         {
-            var proizvodjaci = _proizvodjacDataService.GetAll();
+            var proizvodjaci = await _proizvodjacDataService.GetAllAsync();
             Proizvodjaci.Clear();
             foreach(var proizvodjac in proizvodjaci)
             {
