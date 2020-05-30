@@ -7,5 +7,7 @@ namespace OPP.UI.Data
     public interface IProizvodjacDataService
     {
         Task<List<Proizvodjac>> GetAllAsync();
+
+        Task<Proizvodjac> GetProizvodjacByIdAsync(int proizvodjacId);
     }
 }
