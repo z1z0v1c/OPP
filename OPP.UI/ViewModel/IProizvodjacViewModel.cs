@@ -4,6 +4,7 @@ namespace OPP.UI.ViewModel
 {
     public interface IProizvodjacViewModel
     {
-        Task LoadProizvodjacAsync(int proizvodjacId);
+        Task LoadProizvodjacAsync(int? proizvodjacId);
+        bool HasChanges { get; }
     }
 }

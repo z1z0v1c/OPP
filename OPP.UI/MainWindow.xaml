@@ -5,14 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OPP.UI"
         xmlns:view="clr-namespace:OPP.UI.View"
+        xmlns:viewModel="clr-namespace:OPP.UI.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <!--Template with key-->
+        <!--<DataTemplate x:Key="view"/>-->
+        <DataTemplate DataType="{x:Type viewModel:ProizvodjacViewModel}">
+            <view:ProizvodjacView/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <view:NavigationView Grid.Column="0" DataContext="{Binding NavigationViewModel}"/>
-        <view:ProizvodjacView Grid.Column="1" DataContext="{Binding ProizvodjacViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <view:NavigationView Grid.Column="0" DataContext="{Binding NavigationViewModel}"/>
+            <ContentControl Grid.Column="1" Content="{Binding ProizvodjacViewModel}"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Додај" Width="100" Command="{Binding CreateNewProizvodjacCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>

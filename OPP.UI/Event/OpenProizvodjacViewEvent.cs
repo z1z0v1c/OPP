@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OPP.UI.Event
 {
-    public class OpenProizvodjacViewEvent : PubSubEvent<int>
+    public class OpenProizvodjacViewEvent : PubSubEvent<int?>
     {
     }
 }

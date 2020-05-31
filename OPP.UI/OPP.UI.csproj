@@ -84,8 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\IPregledProizvodjacDataService.cs" />
-    <Compile Include="Data\PregledDataService.cs" />
+    <Compile Include="Data\Lookup\IPregledProizvodjacDataService.cs" />
+    <Compile Include="Data\Lookup\PregledDataService.cs" />
+    <Compile Include="Data\Repository\ProizvodjacRepozitory.cs" />
+    <Compile Include="Event\AfterProizvodjacRemovedEvent.cs" />
     <Compile Include="Event\AfterProizvodjacSavedEvent.cs" />
     <Compile Include="Event\OpenProizvodjacViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="ViewModel\NavigationViewModel.cs" />
     <Compile Include="ViewModel\ProizvodjacViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\MessageDialogService\IMessageDialogService.cs" />
+    <Compile Include="View\MessageDialogService\MessageDialogService.cs" />
     <Compile Include="View\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
@@ -113,8 +117,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\IProizvodjacDataService.cs" />
-    <Compile Include="Data\ProizvodjacDataService.cs" />
+    <Compile Include="Data\Repository\IProizvodjacRepozitory.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

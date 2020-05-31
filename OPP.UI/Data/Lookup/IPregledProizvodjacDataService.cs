@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OPP.UI.Data
+namespace OPP.UI.Data.Lookup
 {
     public interface IPregledProizvodjacDataService
     {

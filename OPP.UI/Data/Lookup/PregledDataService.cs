@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OPP.UI.Data
+namespace OPP.UI.Data.Lookup
 {
     class PregledDataService : IPregledProizvodjacDataService
     {
@@ -27,8 +27,8 @@ namespace OPP.UI.Data
                      new PregledProizvodjaca
                      {
                          Id = p.Id,
-                         DisplayMember = p.Ime + " " + p.Prezime
-                     }).ToListAsync();
+                         DisplayMember = p.Prezime + " " + p.Ime
+                     }).OrderBy(p => p.DisplayMember).ToListAsync();
             }
         }
     }

@@ -33,9 +33,11 @@
         <TextBox Grid.Column="1" Grid.Row="3" Margin="0 5 0 5" Text="{Binding Proizvodjac.Adresa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="1" Grid.Row="4" Margin="0 5 0 5" Text="{Binding Proizvodjac.JMBG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox Grid.Column="1" Grid.Row="5" Margin="0 5 0 5" Text="{Binding Proizvodjac.BPG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <StackPanel Grid.Column="1" Grid.Row="7">
-            <Button Content="Сачувај" Width="125" Margin="10" 
+        <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal">
+            <Button Content="Сачувај" Width="100" Margin="10" 
                     Command="{Binding SaveCommand}"/>
+            <Button Content="Обриши" Width="100" Margin="10" 
+                    Command="{Binding RemoveCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

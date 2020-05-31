@@ -1,6 +1,7 @@
 ﻿using OPP.Model;
-using OPP.UI.Data;
+using OPP.UI.Data.Repozitory;
 using OPP.UI.Event;
+using OPP.UI.View.MessageDialogService;
 using OPP.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
@@ -15,26 +16,50 @@ namespace OPP.UI.ViewModel
 {
     class ProizvodjacViewModel : ViewModelBase, IProizvodjacViewModel
     {
-        private IProizvodjacDataService _proizvodjacDataService;
+        private IProizvodjacRepozitory _proizvodjacRepozitory;
         private IEventAggregator _eventAggregator;
+        private IMessageDialogService _messageDialogService;
         private ProizvodjacWrapper _proizvodjac;
+        private bool _hasChanges;
 
-        public ProizvodjacViewModel(IProizvodjacDataService proizvodjacDataService,
-            IEventAggregator eventAggregator)
+        public ProizvodjacViewModel(IProizvodjacRepozitory proizvodjacRepozitory,
+            IEventAggregator eventAggregator,
+            IMessageDialogService messageDialogService)
         {
-            _proizvodjacDataService = proizvodjacDataService;
+            _proizvodjacRepozitory = proizvodjacRepozitory;
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<OpenProizvodjacViewEvent>()
-                .Subscribe(OnOpenProizvodjacView);
+            _messageDialogService = messageDialogService;
 
             SaveCommand = new DelegateCommand(OnSaveExecute, OnSaveCanExecute);
+            RemoveCommand = new DelegateCommand(OnRemoveExecute);           
         }
 
-        public async Task LoadProizvodjacAsync(int proizvodjacId)
+        public async Task LoadProizvodjacAsync(int? proizvodjacId)
         {
-            var proizvodjac = await _proizvodjacDataService.GetProizvodjacByIdAsync(proizvodjacId);
+            var proizvodjac = proizvodjacId.HasValue
+                ? await _proizvodjacRepozitory.GetProizvodjacByIdAsync(proizvodjacId.Value)
+                : CreateNewProizvodjac();
             Proizvodjac = new ProizvodjacWrapper(proizvodjac);
-            //Proizvodjaci.Clear();
+            Proizvodjac.PropertyChanged += (s, e) =>
+            {
+                if (!HasChanges)
+                {
+                    HasChanges = _proizvodjacRepozitory.HasChanges();
+                }
+                if (e.PropertyName == nameof(Proizvodjac.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }                
+            };
+        ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+
+            //Little trick to trigger validation
+            if(Proizvodjac.Id == 0)
+            {
+                Proizvodjac.Ime = "";
+                Proizvodjac.Prezime = "";
+                Proizvodjac.Adresa = "";
+            }
         }
 
         public ProizvodjacWrapper Proizvodjac
@@ -47,11 +72,27 @@ namespace OPP.UI.ViewModel
             }
         }
 
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set 
+            {
+                if (_hasChanges != value)
+                {
+                    _hasChanges = value;
+                    OnPropertyChanged();
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
+            }
+        }
+
         public ICommand SaveCommand { get; }
+        public ICommand RemoveCommand { get; }
 
         private async void OnSaveExecute()
         {
-            await _proizvodjacDataService.SaveAsync(Proizvodjac.Model);
+            await _proizvodjacRepozitory.SaveAsync();
+            HasChanges = _proizvodjacRepozitory.HasChanges();
             _eventAggregator.GetEvent<AfterProizvodjacSavedEvent>().Publish(
                 new AfterProizvodjacSavedEventArgs
                 {
@@ -62,13 +103,28 @@ namespace OPP.UI.ViewModel
 
         private bool OnSaveCanExecute()
         {
-            //TODO
-            return true;
+            return Proizvodjac != null && !Proizvodjac.HasErrors && HasChanges;
         }
 
-        private async void OnOpenProizvodjacView(int proizvodjacId)
+        private async void OnRemoveExecute()
         {
-            await LoadProizvodjacAsync(proizvodjacId);
+            var result = _messageDialogService.ShowOKCancelDialog(
+                $"Да ли сте сигурни да желите да обришете произвођача {Proizvodjac.Ime} {Proizvodjac.Prezime}?",
+                "Упозорење");
+
+            if (result == MessageDialogResult.OK)
+            {
+                _proizvodjacRepozitory.Remove(Proizvodjac.Model);
+                await _proizvodjacRepozitory.SaveAsync();
+                _eventAggregator.GetEvent<AfterProizvodjacRemovedEvent>().Publish(Proizvodjac.Id);
+            }
+        }
+
+        private Proizvodjac CreateNewProizvodjac()
+        {
+            var proizvodjac = new Proizvodjac();
+            _proizvodjacRepozitory.Add(proizvodjac);
+            return proizvodjac;
         }
     }
 }
