@@ -9,5 +9,7 @@ namespace OPP.UI.Data
         Task<List<Proizvodjac>> GetAllAsync();
 
         Task<Proizvodjac> GetProizvodjacByIdAsync(int proizvodjacId);
+
+        Task SaveAsync(Proizvodjac proizvodjac);
     }
 }

@@ -24,5 +24,12 @@ namespace OPP.UI
             container.Resolve<MainWindow>().Show();
             //new MainWindow(new MainViewModel(new ProizvodjacDataService())).Show();
         }
+
+        private void Application_DispatcherUnhandledException(object sender, 
+            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Дошло је до грешке. Покушајте поново.");
+            e.Handled = true;
+        }
     }
 }

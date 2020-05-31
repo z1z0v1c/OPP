@@ -38,5 +38,15 @@ namespace OPP.UI.Data
                 return await context.Proizvodjaci.AsNoTracking().SingleAsync(p => p.Id == proizvodjacId);
             }
         }
+
+        public async Task SaveAsync(Proizvodjac proizvodjac)
+        {
+            using (var context = _contextCreator())
+            {
+                context.Proizvodjaci.Attach(proizvodjac);
+                context.Entry(proizvodjac).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

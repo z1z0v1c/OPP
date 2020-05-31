@@ -15,13 +15,21 @@ namespace OPP.UI.ViewModel
     {
         private IPregledProizvodjacDataService _pregledProizvodjacDataService;
         private IEventAggregator _eventAggregator;
+        private NavigationItemViewModel _izabraniProizvodjac;
 
         public NavigationViewModel(IPregledProizvodjacDataService pregledProizvodjacDataService,
             IEventAggregator eventAggregator)
         {
             _pregledProizvodjacDataService = pregledProizvodjacDataService;
             _eventAggregator = eventAggregator;
-            Proizvodjaci = new ObservableCollection<PregledProizvodjaca>();
+            Proizvodjaci = new ObservableCollection<NavigationItemViewModel>();
+            _eventAggregator.GetEvent<AfterProizvodjacSavedEvent>().Subscribe(AfeterProizvodjacSaved);
+        }
+
+        private void AfeterProizvodjacSaved(AfterProizvodjacSavedEventArgs obj)
+        {
+            var pregledProizvodjaca = Proizvodjaci.Single(p => p.Id == obj.Id);
+            pregledProizvodjaca.DisplayMember = obj.DisplayMember;
         }
 
         public async Task LoadAsync()
@@ -30,15 +38,15 @@ namespace OPP.UI.ViewModel
             //Proizvodjaci.Clear();
             foreach (var item in pregledProizvodjaca)
             {
-                Proizvodjaci.Add(item);
+                Proizvodjaci.Add(new NavigationItemViewModel(item.Id, item.DisplayMember));
             }
         }
 
-        public ObservableCollection<PregledProizvodjaca> Proizvodjaci { get; }
 
-        private PregledProizvodjaca _izabraniProizvodjac;
 
-        public PregledProizvodjaca IzabraniProizvodjac
+        public ObservableCollection<NavigationItemViewModel> Proizvodjaci { get; }
+
+        public NavigationItemViewModel IzabraniProizvodjac
         {
             get { return _izabraniProizvodjac; }
             set {

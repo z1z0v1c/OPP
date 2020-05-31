@@ -17,8 +17,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Content="Шифра: " Grid.Row="0"/>
         <Label Content="Име: " Grid.Row="1"/>
@@ -26,11 +27,15 @@
         <Label Content="Адреса: " Grid.Row="3"/>
         <Label Content="ЈМБГ: " Grid.Row="4"/>
         <Label Content="Бр. ПГ: " Grid.Row="5"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Proizvodjac.Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Proizvodjac.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Proizvodjac.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Proizvodjac.Adresa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Proizvodjac.JMBG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Proizvodjac.BPG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="0 5 0 5" Text="{Binding Proizvodjac.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="0 5 0 5" Text="{Binding Proizvodjac.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="0 5 0 5" Text="{Binding Proizvodjac.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Margin="0 5 0 5" Text="{Binding Proizvodjac.Adresa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="0 5 0 5" Text="{Binding Proizvodjac.JMBG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Margin="0 5 0 5" Text="{Binding Proizvodjac.BPG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Column="1" Grid.Row="7">
+            <Button Content="Сачувај" Width="125" Margin="10" 
+                    Command="{Binding SaveCommand}"/>
+        </StackPanel>
     </Grid>
 </UserControl>
