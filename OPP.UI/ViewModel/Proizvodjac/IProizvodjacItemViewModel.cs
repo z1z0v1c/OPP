@@ -2,7 +2,7 @@
 
 namespace OPP.UI.ViewModel
 {
-    public interface IProizvodjacViewModel
+    public interface IProizvodjacItemViewModel
     {
         Task LoadProizvodjacAsync(int? proizvodjacId);
         bool HasChanges { get; }

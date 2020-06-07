@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OPP.UI.Data.Repozitory
+namespace OPP.UI.Data.Repository
 {
-    public interface IProizvodjacRepozitory
+    public interface IProizvodjacRepository
     {
         Task<List<Proizvodjac>> GetAllAsync();
         Task<Proizvodjac> GetProizvodjacByIdAsync(int? proizvodjacId);

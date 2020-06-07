@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OPP.UI.Data.Lookup
 {
-    class PregledDataService : IPregledProizvodjacDataService
+    class PregledDataService : IPregledProizvodjacDataService, IPregledVrstaProizvodaDataService
     {
         private Func<OPPDbContext> _contextCreator;
 
@@ -18,17 +18,31 @@ namespace OPP.UI.Data.Lookup
             _contextCreator = contextCreator;
         }
 
-        public async Task<IEnumerable<PregledProizvodjaca>> GetPregledProizvodjacaAsync()
+        public async Task<IEnumerable<Pregled>> GetPregledProizvodjacaAsync()
         {
             using (var context = _contextCreator())
             {
                 return await context.Proizvodjaci.AsNoTracking().
                      Select(p =>
-                     new PregledProizvodjaca
+                     new Pregled
                      {
                          Id = p.Id,
                          DisplayMember = p.Prezime + " " + p.Ime
                      }).OrderBy(p => p.DisplayMember).ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Pregled>> GetPregledVrstaProizvodaAsync()
+        {
+            using (var context = _contextCreator())
+            {
+                return await context.VrsteProizvoda.AsNoTracking().
+                     Select(v =>
+                     new Pregled
+                     {
+                         Id = v.Id,
+                         DisplayMember = v.Naziv
+                     }).OrderBy(v => v.DisplayMember).ToListAsync();
             }
         }
     }

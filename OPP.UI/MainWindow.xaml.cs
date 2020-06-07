@@ -6,9 +6,9 @@ namespace OPP.UI
 {
     public partial class MainWindow : Window
     {
-        private MainViewModel _viewModel;
+        private MainWindowViewModel _viewModel;
 
-        public MainWindow(MainViewModel viewModel)
+        public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;

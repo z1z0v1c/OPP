@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using OPP.DataAccess;
 using OPP.UI.Data.Lookup;
-using OPP.UI.Data.Repozitory;
+using OPP.UI.Data.Repository;
 using OPP.UI.View.MessageDialogService;
 using OPP.UI.ViewModel;
 using Prism.Events;
@@ -22,12 +22,17 @@ namespace OPP.UI.Startup
 
             builder.RegisterType<MessageDialogService>().As<IMessageDialogService>();
 
-            builder.RegisterType<MainViewModel>().AsSelf();
+            builder.RegisterType<MainWindowViewModel>().AsSelf();
+            //builder.RegisterType<MainWindowViewModel>().As<MainWindowViewModel>();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
             builder.RegisterType<ProizvodjacViewModel>().As<IProizvodjacViewModel>();
+            builder.RegisterType<ProizvodjacItemViewModel>().As<IProizvodjacItemViewModel>();
+            builder.RegisterType<VrstaProizvodaItemViewModel>().As<IVrstaProizvodaItemViewModel>();
+
 
             builder.RegisterType<PregledDataService>().AsImplementedInterfaces();
-            builder.RegisterType<ProizvodjacRepozitory>().As<IProizvodjacRepozitory>();
+            builder.RegisterType<ProizvodjacRepository>().As<IProizvodjacRepository>();
+            builder.RegisterType<VrstaProizvodaRepository>().As<IVrstaProizvodaRepository>();
 
             return builder.Build();
         }

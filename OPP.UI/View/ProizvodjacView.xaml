@@ -3,41 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:OPP.UI.View"
+             xmlns:view="clr-namespace:OPP.UI.View"
+             xmlns:viewModel="clr-namespace:OPP.UI.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!--Template with key-->
+        <!--<DataTemplate x:Key="view"/>-->
+        <DataTemplate DataType="{x:Type viewModel:ProizvodjacItemViewModel}">
+            <view:ProizvodjacItemView/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" />
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Label Content="Шифра: " Grid.Row="0"/>
-        <Label Content="Име: " Grid.Row="1"/>
-        <Label Content="Презиме: " Grid.Row="2"/>
-        <Label Content="Адреса: " Grid.Row="3"/>
-        <Label Content="ЈМБГ: " Grid.Row="4"/>
-        <Label Content="Бр. ПГ: " Grid.Row="5"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="0 5 0 5" Text="{Binding Proizvodjac.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="0 5 0 5" Text="{Binding Proizvodjac.Ime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="0 5 0 5" Text="{Binding Proizvodjac.Prezime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="0 5 0 5" Text="{Binding Proizvodjac.Adresa, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="4" Margin="0 5 0 5" Text="{Binding Proizvodjac.JMBG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox Grid.Column="1" Grid.Row="5" Margin="0 5 0 5" Text="{Binding Proizvodjac.BPG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal">
-            <Button Content="Сачувај" Width="100" Margin="10" 
-                    Command="{Binding SaveCommand}"/>
-            <Button Content="Обриши" Width="100" Margin="10" 
-                    Command="{Binding RemoveCommand}"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <view:NavigationView Grid.Column="0" DataContext="{Binding NavigationViewModel}"/>
+            <ContentControl Grid.Column="1" Content="{Binding ProizvodjacItemViewModel}"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Додај" Width="100" Command="{Binding CreateNewProizvodjacCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -20,7 +20,7 @@ namespace OPP.UI.ViewModel
             _eventAggregator = eventAggregator;
             Id = id;
             DisplayMember = displayMember;
-            OpenProizvodjacViewCommand = new DelegateCommand(OnOpenProizvodjacView);
+            OpenProizvodjacItemViewCommand = new DelegateCommand(OnOpenProizvodjacItemView);
         }
 
         public int Id { get; }
@@ -35,11 +35,11 @@ namespace OPP.UI.ViewModel
             }
         }
 
-        public ICommand OpenProizvodjacViewCommand { get; }
+        public ICommand OpenProizvodjacItemViewCommand { get; }
 
-        private void OnOpenProizvodjacView()
+        private void OnOpenProizvodjacItemView()
         {
-            _eventAggregator.GetEvent<OpenProizvodjacViewEvent>()
+            _eventAggregator.GetEvent<OpenProizvodjacItemViewEvent>()
                         .Publish(Id);
         }
     }

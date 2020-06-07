@@ -9,24 +9,24 @@ using System.Windows.Input;
 
 namespace OPP.UI.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class ProizvodjacViewModel : ViewModelBase, IProizvodjacViewModel
     {
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
-        private Func<IProizvodjacViewModel> _proizvodjacViewModelCreator;
-        private IProizvodjacViewModel _proizvodjacViewModel;
+        private Func<IProizvodjacItemViewModel> _proizvodjacItemViewModelCreator;
+        private IProizvodjacItemViewModel _proizvodjacItemViewModel;
 
-        public MainViewModel(INavigationViewModel navigationViewModel, 
-            Func<IProizvodjacViewModel> proizvodjacViewModelCreator,
+        public ProizvodjacViewModel(INavigationViewModel navigationViewModel,
+            Func<IProizvodjacItemViewModel> proizvodjacItemViewModelCreator,
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService)
         {
-            _proizvodjacViewModelCreator = proizvodjacViewModelCreator;
+            _proizvodjacItemViewModelCreator = proizvodjacItemViewModelCreator;
             _eventAggregator = eventAggregator;
             _messageDialogService = messageDialogService;
 
-            _eventAggregator.GetEvent<OpenProizvodjacViewEvent>()
-            .Subscribe(OnOpenProizvodjacView);
+            _eventAggregator.GetEvent<OpenProizvodjacItemViewEvent>()
+            .Subscribe(OnOpenProizvodjacItemView);
             _eventAggregator.GetEvent<AfterProizvodjacRemovedEvent>()
             .Subscribe(OnRemoveProizvodjacView);
 
@@ -39,29 +39,29 @@ namespace OPP.UI.ViewModel
             await NavigationViewModel.LoadAsync();
         }
 
-        private async void OnOpenProizvodjacView(int? proizvodjacId)
+        private async void OnOpenProizvodjacItemView(int? proizvodjacId)
         {
-            if(ProizvodjacViewModel != null && ProizvodjacViewModel.HasChanges)
+            if (ProizvodjacItemViewModel != null && ProizvodjacItemViewModel.HasChanges)
             {
                 var result = _messageDialogService.ShowOKCancelDialog("Унели сте измене. Да ли желите да напустите страницу?", "Упозорење");
-                if(result == MessageDialogResult.Cancel)
+                if (result == MessageDialogResult.Cancel)
                 {
                     return;
                 }
             }
-            ProizvodjacViewModel = _proizvodjacViewModelCreator();
-            await ProizvodjacViewModel.LoadProizvodjacAsync(proizvodjacId);
+            ProizvodjacItemViewModel = _proizvodjacItemViewModelCreator();
+            await ProizvodjacItemViewModel.LoadProizvodjacAsync(proizvodjacId);
         }
 
         public INavigationViewModel NavigationViewModel { get; }
 
-        public IProizvodjacViewModel ProizvodjacViewModel
+        public IProizvodjacItemViewModel ProizvodjacItemViewModel
         {
-            get { return _proizvodjacViewModel; }
-            private set 
-            { 
-                _proizvodjacViewModel = value;
-                OnPropertyChanged(); 
+            get { return _proizvodjacItemViewModel; }
+            private set
+            {
+                _proizvodjacItemViewModel = value;
+                OnPropertyChanged();
             }
         }
 
@@ -69,12 +69,12 @@ namespace OPP.UI.ViewModel
 
         private void OnCreateNewProizvodjacExecute()
         {
-            OnOpenProizvodjacView(null);
+            OnOpenProizvodjacItemView(null);
         }
 
         private void OnRemoveProizvodjacView(int obj)
         {
-            ProizvodjacViewModel = null;
+            ProizvodjacItemViewModel = null;
         }
     }
 }

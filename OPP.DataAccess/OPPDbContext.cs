@@ -10,7 +10,12 @@ namespace OPP.DataAccess
         {
 
         }
+
         public DbSet<Proizvodjac> Proizvodjaci { get; set; }
+
+        public DbSet<VrstaProizvoda> VrsteProizvoda { get; set; }
+
+        public DbSet<Proizvod> Proizvodi { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

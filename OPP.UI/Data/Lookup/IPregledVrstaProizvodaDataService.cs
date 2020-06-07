@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace OPP.UI.Data.Lookup
 {
-    public interface IPregledProizvodjacDataService
+    interface IPregledVrstaProizvodaDataService
     {
-        Task<IEnumerable<Pregled>> GetPregledProizvodjacaAsync();
+        Task<IEnumerable<Pregled>> GetPregledVrstaProizvodaAsync();
     }
 }

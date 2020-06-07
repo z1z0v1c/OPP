@@ -59,6 +59,14 @@
     <Compile Include="Migrations\202005261759422_Initial-Database.designer.cs">
       <DependentUpon>202005261759422_Initial-Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006021950169_Proizvodi.cs" />
+    <Compile Include="Migrations\202006021950169_Proizvodi.designer.cs">
+      <DependentUpon>202006021950169_Proizvodi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006022003584_Proizvodi2.cs" />
+    <Compile Include="Migrations\202006022003584_Proizvodi2.designer.cs">
+      <DependentUpon>202006022003584_Proizvodi2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OPPDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +87,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005261759422_Initial-Database.resx">
       <DependentUpon>202005261759422_Initial-Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006021950169_Proizvodi.resx">
+      <DependentUpon>202006021950169_Proizvodi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006022003584_Proizvodi2.resx">
+      <DependentUpon>202006022003584_Proizvodi2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

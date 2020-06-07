@@ -1,20 +1,17 @@
 ﻿using OPP.DataAccess;
 using OPP.Model;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace OPP.UI.Data.Repozitory
+namespace OPP.UI.Data.Repository
 {
-    public class ProizvodjacRepozitory : IProizvodjacRepozitory
+    public class ProizvodjacRepository : IProizvodjacRepository
     {
         private OPPDbContext _context;
 
-        public ProizvodjacRepozitory(OPPDbContext context)
+        public ProizvodjacRepository(OPPDbContext context)
         {
             _context = context;
         }

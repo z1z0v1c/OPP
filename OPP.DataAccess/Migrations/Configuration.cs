@@ -24,6 +24,11 @@
                     new Proizvodjac { Id = 2, Ime = "Milos", Prezime = "Markovic", JMBG = "1234567891013", BPG = "123456789102", Adresa = "Leusici" },
                     new Proizvodjac { Id = 3, Ime = "Ivan", Prezime = "Ilic", JMBG = "1234567891014", BPG = "1234567891013", Adresa = "Teocin" }
                     );
+                context.VrsteProizvoda.AddOrUpdate(
+                    v => v.Id,
+                    new VrstaProizvoda { Id = 1, Naziv = "Малина" },
+                    new VrstaProizvoda { Id = 2, Naziv = "Купина" }
+                    );
             }
             catch (DbEntityValidationException dbEx)
             {

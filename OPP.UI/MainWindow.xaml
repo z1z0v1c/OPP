@@ -16,20 +16,30 @@
         </DataTemplate>
     </Window.Resources>
     <Grid>
+    
+    
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+                <RowDefinition Height="15"/>
+                <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <view:NavigationView Grid.Column="0" DataContext="{Binding NavigationViewModel}"/>
-            <ContentControl Grid.Column="1" Content="{Binding ProizvodjacViewModel}"/>
-        </Grid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Menu Grid.Row="0" IsMainMenu="True" >
+                <MenuItem Header="Шифрарници">
+                    <MenuItem x:Name="Произвођачи" Header="Произвођачи" Command="{Binding OpenProizvodjacViewCommand}"/>
+                    <MenuItem x:Name="Производи" Header="Производи"/>
+                    <MenuItem x:Name="Амбалажа" Header="Амбалажа"/>
+                </MenuItem>
+                <MenuItem Header="Документа"/>
+                <MenuItem Header="Извештаји"/>
+                <MenuItem Header="Статистика"/>
+            </Menu>
+            <Grid Grid.Row="1">
+                <view:ProizvodjacView DataContext="{Binding ProizvodjacViewModel}"/>
+            </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Content="Додај" Width="100" Command="{Binding CreateNewProizvodjacCommand}"/>
         </StackPanel>
+    </Grid>
     </Grid>
 </Window>

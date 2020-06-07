@@ -85,23 +85,37 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Lookup\IPregledProizvodjacDataService.cs" />
+    <Compile Include="Data\Lookup\IPregledVrstaProizvodaDataService.cs" />
     <Compile Include="Data\Lookup\PregledDataService.cs" />
-    <Compile Include="Data\Repository\ProizvodjacRepozitory.cs" />
+    <Compile Include="Data\Repository\IVrstaProizvodaRepository.cs" />
+    <Compile Include="Data\Repository\ProizvodjacRepository.cs" />
+    <Compile Include="Data\Repository\VrstaProizvodaRepository.cs" />
+    <Compile Include="Event\AfterVrstaProizvodaRemovedEvent.cs" />
     <Compile Include="Event\AfterProizvodjacRemovedEvent.cs" />
     <Compile Include="Event\AfterProizvodjacSavedEvent.cs" />
     <Compile Include="Event\OpenProizvodjacViewEvent.cs" />
+    <Compile Include="Event\OpenVrstaProizvodaViewEvent.cs" />
+    <Compile Include="Event\OpenProizvodjacItemViewEvent.cs" />
     <Compile Include="Startup\Bootstrapper.cs" />
+    <Compile Include="Event\AfterVrstaProizvodaSavedEvent.cs" />
     <Compile Include="ViewModel\INavigationViewModel.cs" />
-    <Compile Include="ViewModel\IProizvodjacViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NavigationItemViewModel.cs" />
-    <Compile Include="ViewModel\NavigationViewModel.cs" />
-    <Compile Include="ViewModel\ProizvodjacViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\IProizvodjacItemViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\IProizvodjacViewModel.cs" />
+    <Compile Include="ViewModel\VrstaProizvoda\IVrstaProizvodaViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\ProizvodjacViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\NavigationItemViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\NavigationViewModel.cs" />
+    <Compile Include="ViewModel\Proizvodjac\ProizvodjacItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\VrstaProizvoda\VrstaProizvodaItemViewModel.cs" />
     <Compile Include="View\MessageDialogService\IMessageDialogService.cs" />
     <Compile Include="View\MessageDialogService\MessageDialogService.cs" />
     <Compile Include="View\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProizvodjacItemView.xaml.cs">
+      <DependentUpon>ProizvodjacItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProizvodjacView.xaml.cs">
       <DependentUpon>ProizvodjacView.xaml</DependentUpon>
@@ -109,6 +123,8 @@
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Compile Include="Wrapper\ProizvodjacWrapper.cs" />
+    <Compile Include="Wrapper\ProizvodWrapper.cs" />
+    <Compile Include="Wrapper\VrstaProizvodaWrapper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,12 +133,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\Repository\IProizvodjacRepozitory.cs" />
+    <Compile Include="Data\Repository\IProizvodjacRepository.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProizvodjacItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

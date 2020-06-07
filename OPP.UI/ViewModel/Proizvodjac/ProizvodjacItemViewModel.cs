@@ -1,28 +1,24 @@
 ﻿using OPP.Model;
-using OPP.UI.Data.Repozitory;
+using OPP.UI.Data.Repository;
 using OPP.UI.Event;
 using OPP.UI.View.MessageDialogService;
 using OPP.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace OPP.UI.ViewModel
 {
-    class ProizvodjacViewModel : ViewModelBase, IProizvodjacViewModel
+    class ProizvodjacItemViewModel : ViewModelBase, IProizvodjacItemViewModel
     {
-        private IProizvodjacRepozitory _proizvodjacRepozitory;
+        private IProizvodjacRepository _proizvodjacRepozitory;
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
         private ProizvodjacWrapper _proizvodjac;
         private bool _hasChanges;
 
-        public ProizvodjacViewModel(IProizvodjacRepozitory proizvodjacRepozitory,
+        public ProizvodjacItemViewModel(IProizvodjacRepository proizvodjacRepozitory,
             IEventAggregator eventAggregator,
             IMessageDialogService messageDialogService)
         {

@@ -51,7 +51,7 @@ namespace OPP.UI.ViewModel
                 OnPropertyChanged();
                 if(_izabraniProizvodjac != null)
                 {
-                    _eventAggregator.GetEvent<OpenProizvodjacViewEvent>()
+                    _eventAggregator.GetEvent<OpenProizvodjacItemViewEvent>()
                         .Publish(_izabraniProizvodjac.Id);
                 }
             }
